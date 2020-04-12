@@ -1,0 +1,48 @@
+version: '3'
+services:
+  firefox:
+    image: selenium/node-firefox:3
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - hub
+    environment:
+      HUB_HOST: hub
+
+  chrome:
+    image: selenium/node-chrome:3
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - hub
+    environment:
+      HUB_HOST: hub
+
+  hub:
+    image: selenium/hub:3
+    ports:
+      - "4444:4444"
+
+  testsuite:
+    image: qlitelabs/python-selenium:1.0
+    environment:
+      BROWSER: chrome
+    depends_on:
+      - firefox
+      - chrome
+      - hub
+    volumes:
+      - allure-results:/usr/src/app/reports/allure-reports
+
+  allure:
+    image: "frankescobar/allure-docker-service"
+    environment:
+      CHECK_RESULTS_EVERY_SECONDS: 1
+      KEEP_HISTORY: "TRUE"
+    ports:
+      - "4040:4040"
+      - "5050:5050"
+    volumes:
+      - allure-results:/app/allure-results
+volumes:
+  allure-results:
