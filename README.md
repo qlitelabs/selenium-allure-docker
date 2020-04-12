@@ -32,6 +32,10 @@
 
 ![Allure TestSuite](./assets/allure_testsuite.png "Allure TestSuite")
 
+![Login Test Report with screenshot](./assets/successful_login.png "Login Test Report with screenshot")
+
+![Logout Test Report with screenshot](./assets/successful_logout.png "Logout Test Report with screenshot")
+
 ![Allure BDD](./assets/allure_bdd.png "Allure BDD")
 
 ![Allure Graphs](./assets/allure_graphs.png "Allure Graphs")

@@ -20,6 +20,11 @@ class TestLogin():
         login.enter_username(environment.USERNAME)
         login.enter_password(environment.PASSWORD)
         login.click_login()
+        currTime = moment.now().strftime("%d-%m-%Y_%H-%M-%S")
+        testName = environment.whoami()
+        screenshotName = testName + "_login_success_" + currTime
+        allure.attach(self.driver.get_screenshot_as_png(), name=screenshotName,
+                          attachment_type=allure.attachment_type.PNG)
 
     def test_logout(self):
         try:
@@ -29,6 +34,11 @@ class TestLogin():
             homepage.click_logout()
             x = driver.title
             assert x == "OrangeHRM"
+            currTime = moment.now().strftime("%d-%m-%Y_%H-%M-%S")
+            testName = environment.whoami()
+            screenshotName = testName + "_logout_success_" + currTime
+            allure.attach(driver.get_screenshot_as_png(),name=screenshotName,
+                          attachment_type=allure.attachment_type.PNG)
         except AssertionError as error:
             print("Assertion error occurred")
             print(error)
